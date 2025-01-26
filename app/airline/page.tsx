@@ -49,7 +49,7 @@ export default function Airlines() {
 
       const data = await response.json();
       setAirlineData(data);
-    } catch (err: any) {
+    } catch (err: Error) {
       setError(err.message);
     } finally {
       setLoading(false);

@@ -55,7 +55,7 @@ export default function Aircraft() {
 
       const data = await response.json();
       setAircraftData(data);
-    } catch (err: any) {
+    } catch (err: Error) {
       setError(err.message);
     } finally {
       setLoading(false);

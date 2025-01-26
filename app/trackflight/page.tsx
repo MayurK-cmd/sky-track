@@ -40,7 +40,7 @@ export default function FlightSearch() {
 
       const data = await response.json();
       setFlightData(data);
-    } catch (err: any) {
+    } catch (err: Error) {
       setError(err.message);
     } finally {
       setLoading(false);

@@ -65,7 +65,7 @@ export default function Helicopter() {
       } else {
         setHelicopterData(data);
       }
-    } catch (err: any) {
+    } catch (err: Error) {
       setError(err.message);
     } finally {
       setLoading(false);
