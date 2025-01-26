@@ -1,101 +1,121 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React from 'react';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import Helicopter from './helicopter/page';
+import Airlines from './airline/page';
+import Aircraft from './aircraft/page';
+import Track from './trackflight/page';
+
+function MainPage() {
+  const navigate = useNavigate();
+
+  const handleNavigation = (route: string) => {
+    if (route) {
+      navigate(route);
+    }
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="relative w-full min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
+      {/* Hover Menu */}
+      <div className="flex flex-wrap justify-center space-x-8 mb-6 mt-5">
+        {/* Search a Plane */}
+        <div className="relative group mb-4 sm:mb-0">
+          <button className="text-lg font-semibold">Search a Plane</button>
+          <div className="absolute hidden group-hover:block bg-black border border-gray-700 p-2 rounded shadow-lg ">
+            <ul>
+              <li
+                onClick={() => handleNavigation('/helicopter')}
+                className="p-2 hover:underline hover:decoration-red-500 hover:decoration-4"
+              >
+                Helicopter
+              </li>
+              <li
+                onClick={() => handleNavigation('/aircraft')}
+                className="p-2 hover:underline hover:decoration-red-500 hover:decoration-4"
+              >
+                Aircraft
+              </li>
+            </ul>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        {/* Track a Flight */}
+        <div className="relative group mb-4 sm:mb-0">
+          <button className="text-lg font-semibold">Track a Flight</button>
+          <div className="absolute hidden group-hover:block bg-black border border-gray-700 p-2 rounded shadow-lg ">
+            <ul>
+              <li
+                onClick={() => handleNavigation('/track')}
+                className="p-2 hover:underline hover:decoration-red-500 hover:decoration-4"
+              >
+                Track a Plane
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Search an Airline */}
+        <div className="relative group mb-4 sm:mb-0">
+          <button className="text-lg font-semibold">Search an Airline</button>
+          <div className="absolute hidden group-hover:block bg-black-800 border border-gray-700 p-2 rounded shadow-lg ">
+            <ul>
+              <li
+                onClick={() => handleNavigation('/airline')}
+                className="p-2 hover:underline hover:decoration-red-500 hover:decoration-4"
+              >
+                Airlines
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Horizontal Line with Animation */}
+      <div className="relative mb-6 w-full group">
+        <div className="relative w-full h-[2px] bg-gray-700">
+          {/* White animated line */}
+          <span className="absolute top-0 left-0 w-0 h-full bg-white transition-all duration-500 ease-in-out group-hover:w-full"></span>
+        </div>
+      </div>
+
+      {/* Description Box */}
+      <div className="text-center max-w-3xl mb-16">
+        <h1 className="text-4xl font-bold mb-4">SkyTrack</h1>
+        <p className="leading-7 mb-10">
+          Welcome to the ultimate aviation hub. Explore aircraft specifications, track flights in real time, and stay updated with your favorite airlines. Our platform offers a seamless experience for aviation enthusiasts, professionals, and travelers alike. Whether you’re fascinated by helicopters, airplanes, or the logistics of airlines, we’ve got something for everyone. Soar to new heights with us and experience the world of aviation like never before!
+        </p>
+
+        <div className="relative bg-black p-6 rounded shadow-lg group overflow-hidden">
+          <h2 className="text-2xl font-semibold mb-3 text-white">A Brief History of Aviation</h2>
+          <p className="leading-7 text-gray-300">
+            The history of aviation began with mankind's dream of flight. From the ancient myth of Icarus to Leonardo da Vinci's sketches of flying machines, humans have always aspired to take to the skies. The first successful powered flight by the Wright brothers in 1903 marked the beginning of modern aviation. Since then, aviation has evolved dramatically, enabling global travel, commerce, and exploration. Today, aviation stands as a testament to human ingenuity and the relentless pursuit of innovation.
+          </p>
+
+          {/* Animated border effect */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-white origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white origin-right scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
+            <div className="absolute top-0 bottom-0 left-0 w-[2px] bg-white origin-top scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+            <div className="absolute top-0 bottom-0 right-0 w-[2px] bg-white origin-bottom scale-y-0 group-hover:scale-y-100 transition-transform duration-300"></div>
+          </div>
+        </div>
+      </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/helicopter" element={<Helicopter />} />
+        <Route path="/airline" element={<Airlines />} />
+        <Route path="/aircraft" element={<Aircraft />} />
+        <Route path="/track" element={<Track />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
