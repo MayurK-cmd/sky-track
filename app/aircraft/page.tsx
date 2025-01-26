@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 
-
 interface Aircraft {
   manufacturer: string;
   model: string;
@@ -53,14 +52,15 @@ export default function Aircraft() {
         throw new Error("Failed to fetch aircraft data");
       }
 
-      const data = await response.json();
+      // Explicitly typing the API response as Aircraft[]
+      const data: Aircraft[] = await response.json();
       setAircraftData(data);
-    } catch (err: Error) {  // use Error type instead of any
+    } catch (err: Error) { // Catching the error as type Error
       setError(err.message);
     } finally {
       setLoading(false);
     }
-};
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white p-4">
@@ -98,7 +98,7 @@ export default function Aircraft() {
 
         {loading && <p className="text-center">Loading...</p>}
         {error && <p className="text-red-500 text-center">Error: {error}</p>}
-        {aircraftData.length > 0 ? (
+        {aircraftData && aircraftData.length > 0 ? (
           <div>
             <h2 className="text-2xl font-bold mb-4">Aircraft Details</h2>
             {aircraftData.map((aircraft, index) => (

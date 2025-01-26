@@ -59,20 +59,20 @@ export default function Helicopter() {
         throw new Error("Failed to fetch helicopter data");
       }
 
-      const data = await response.json();
+      const data: Helicopter[] = await response.json();
+
       if (data.length === 0) {
         setError("No helicopters found matching the search criteria.");
       } else {
         setHelicopterData(data);
       }
-      
-      setHelicopterData(data);
-    } catch (err: Error) {  // use Error type instead of any
-      setError(err.message);
+    } catch (err: any) { // Use any type to catch all errors, and log for debugging
+      console.error("Error fetching helicopter data:", err); // Log for debugging purposes
+      setError("Error: " + (err.message || "Unknown error"));
     } finally {
       setLoading(false);
     }
-};
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white p-4">

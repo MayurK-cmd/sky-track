@@ -10,9 +10,13 @@ interface Flight {
   flight_status: string;
 }
 
+interface FlightDataResponse {
+  data: Flight[];
+}
+
 export default function FlightSearch() {
   const [flightNumber, setFlightNumber] = useState<string>("");
-  const [flightData, setFlightData] = useState<{ data: Flight[] } | null>(null);
+  const [flightData, setFlightData] = useState<FlightDataResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -29,6 +33,12 @@ export default function FlightSearch() {
       return;
     }
 
+    if (!flightNumber) {
+      setError("Please enter a flight number.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch(
         `https://api.aviationstack.com/v1/flights?access_key=${apiKey}&flight_iata=${flightNumber}`
@@ -38,11 +48,18 @@ export default function FlightSearch() {
         throw new Error("Failed to fetch flight data");
       }
 
-      const data = await response.json();
-      
-      setFlightData(data);
-    } catch (err: Error) {  // use Error type instead of any
-      setError(err.message);
+      const data: FlightDataResponse = await response.json();
+
+      // Check if the response contains flight data
+      if (!data || !data.data || data.data.length === 0) {
+        setError("No flight data found for this flight number.");
+      } else {
+        setFlightData(data);
+      }
+    } catch (err: any) {
+      // Log error to the console for debugging
+      console.error("Error fetching flight data:", err);
+      setError("Error: " + (err.message || "Unknown error"));
     } finally {
       setLoading(false);
     }
@@ -73,8 +90,8 @@ export default function FlightSearch() {
         </div>
 
         {loading && <p className="text-center">Loading...</p>}
-        {error && <p className="text-red-500 text-center">Error: {error}</p>}
-        {flightData && flightData.data && flightData.data.length > 0 ? (
+        {error && <p className="text-red-500 text-center">{error}</p>}
+        {flightData && flightData.data.length > 0 ? (
           <div>
             <h2 className="text-2xl font-bold mb-4">Flight Details</h2>
             {flightData.data.map((flight, index) => (

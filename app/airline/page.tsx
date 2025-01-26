@@ -47,13 +47,17 @@ export default function Airlines() {
         throw new Error("Failed to fetch airline data");
       }
 
-       const data = await response.json();
-  setAirlineData(data);
-} catch (err: Error) {  // use Error type instead of any
-  setError(err.message);
-} finally {
-  setLoading(false);
-}
+      const data: Airline[] = await response.json();
+      setAirlineData(data);
+    } catch (err: Error) {
+      // Log the error for debugging purposes in development mode
+      if (process.env.NODE_ENV === 'development') {
+        console.error(err);
+      }
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -90,12 +94,14 @@ export default function Airlines() {
                 key={index}
                 className="border border-gray-700 bg-black rounded p-4 mb-4 shadow"
               >
+                {/* Image optimization might fail if the logo_url is not a valid optimized URL */}
                 <Image
                   src={airline.logo_url}
                   alt={`${airline.name} logo`}
                   width={200}
                   height={100}
                   className="w-32 h-auto mb-4"
+                  unoptimized={true} // You can disable image optimization if necessary
                 />
                 <p><strong>Name:</strong> {airline.name}</p>
                 <p><strong>IATA Code:</strong> {airline.iata}</p>
