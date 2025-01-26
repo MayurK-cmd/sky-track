@@ -47,13 +47,13 @@ export default function Airlines() {
         throw new Error("Failed to fetch airline data");
       }
 
-      const data = await response.json();
-      setAirlineData(data);
-    } catch (err: Error) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+       const data = await response.json();
+  setAirlineData(data);
+} catch (err: Error) {  // use Error type instead of any
+  setError(err.message);
+} finally {
+  setLoading(false);
+}
   };
 
   return (

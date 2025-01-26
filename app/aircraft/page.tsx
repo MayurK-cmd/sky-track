@@ -55,12 +55,12 @@ export default function Aircraft() {
 
       const data = await response.json();
       setAircraftData(data);
-    } catch (err: Error) {
+    } catch (err: Error) {  // use Error type instead of any
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  };
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black text-white p-4">
