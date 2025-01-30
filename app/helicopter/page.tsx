@@ -39,7 +39,7 @@ export default function Helicopter() {
     setError("");
     setHelicopterData([]);
 
-    const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+    const apiKey = process.env.NEXT_PUBLIC_API;
 
     if (!apiKey) {
       setError("API key is missing or undefined.");
