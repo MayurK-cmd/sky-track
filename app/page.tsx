@@ -133,10 +133,10 @@
 
 
 
-// "use client"; // This is not necessary in Next.js. Next.js handles this by default.
+// app/page.tsx
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link'; // Import Next.js Link for navigation
+import Link from 'next/link';
 
 function MainPage() {
   const [isClient, setIsClient] = useState(false);
@@ -175,7 +175,7 @@ function MainPage() {
           <div className="absolute hidden group-hover:block bg-black border border-gray-700 p-2 rounded shadow-lg ">
             <ul>
               <li className="p-2 hover:underline hover:decoration-red-500 hover:decoration-4">
-                <Link href="/track">Track a Plane</Link>
+                <Link href="/trackflight">Track a Plane</Link>
               </li>
             </ul>
           </div>
