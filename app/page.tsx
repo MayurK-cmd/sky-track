@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import Helicopter from './helicopter/page';
 import Airlines from './airline/page';
@@ -8,13 +8,23 @@ import Aircraft from './aircraft/page';
 import Track from './trackflight/page';
 
 function MainPage() {
+  const [isClient, setIsClient] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // This code will only run on the client
+    setIsClient(true);
+  }, []);
 
   const handleNavigation = (route: string) => {
     if (route) {
       navigate(route);
     }
   };
+
+  if (!isClient) {
+    return null; // Return nothing during SSR
+  }
 
   return (
     <div className="relative w-full min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
@@ -90,13 +100,8 @@ function MainPage() {
         <div className="relative bg-black p-6 rounded shadow-lg group overflow-hidden">
           <h2 className="text-2xl font-semibold mb-3 text-white">A Brief History of Aviation</h2>
           <p className="leading-7 text-gray-300">
-          
-  The history of aviation began with mankind&apos;s dream of flight. From the ancient myth of Icarus 
-  to Leonardo da Vinci&apos;s sketches of flying machines, humans have always aspired to take to the skies. 
-  The first successful powered flight by the Wright brothers in 1903 marked the beginning of modern aviation. 
-  Since then, aviation has evolved dramatically, enabling global travel, commerce, and exploration. 
-  Today, aviation stands as a testament to human ingenuity and the relentless pursuit of innovation.
-</p>
+            The history of aviation began with mankind&apos;s dream of flight. From the ancient myth of Icarus to Leonardo da Vinci&apos;s sketches of flying machines, humans have always aspired to take to the skies. The first successful powered flight by the Wright brothers in 1903 marked the beginning of modern aviation. Since then, aviation has evolved dramatically, enabling global travel, commerce, and exploration. Today, aviation stands as a testament to human ingenuity and the relentless pursuit of innovation.
+          </p>
 
           {/* Animated border effect */}
           <div className="absolute inset-0 pointer-events-none">
