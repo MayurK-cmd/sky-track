@@ -55,18 +55,29 @@ export default function FlightSearch() {
       const data: FlightDataResponse = await response.json();
 
       // Check if the response contains flight data
-      if (!data || !data.data || data.data.length === 0) {
-        setError("No flight data found for this flight number.");
-      } else {
-        setFlightData(data);
-      }
-    } catch (err: unknown) {
-      // Log error to the console for debugging
-      console.error("Error fetching flight data:", err);
-      setError("Error: " + (err.message || "Unknown error"));
-    } finally {
-      setLoading(false);
+    //   if (!data || !data.data || data.data.length === 0) {
+    //     setError("No flight data found for this flight number.");
+    //   } else {
+    //     setFlightData(data);
+    //   }
+    // } catch (err: unknown) {
+    //   // Log error to the console for debugging
+    //   console.error("Error fetching flight data:", err);
+    //   setError("Error: " + (err.message || "Unknown error"));
+    // } finally {
+    //   setLoading(false);
+    // }
+
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error("Error fetching the given flight.");
     }
+
+    setFlightData(data);
+  } catch (err) {
+    setError(err instanceof Error ? err.message : "An unknown error occurred.");
+  } finally {
+    setLoading(false);
+  }
   };
 
   return (

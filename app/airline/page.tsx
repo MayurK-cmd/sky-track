@@ -49,12 +49,8 @@ export default function Airlines() {
 
       const data: Airline[] = await response.json();
       setAirlineData(data);
-    } catch (err: unknown) {
-      // Log the error for debugging purposes in development mode
-      if (process.env.NODE_ENV === 'development') {
-        console.error(err);
-      }
-      setError(err.message);
+    } catch(err){
+      setError(err instanceof Error ? err.message: "An unknown error occured");
     } finally {
       setLoading(false);
     }
