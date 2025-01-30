@@ -55,7 +55,7 @@ export default function Aircraft() {
       // Explicitly typing the API response as Aircraft[]
       const data: Aircraft[] = await response.json();
       setAircraftData(data);
-    } catch (err: Error) { // Catching the error as type Error
+    } catch (err: unknown) { // Catching the error as type Error
       setError(err.message);
     } finally {
       setLoading(false);
