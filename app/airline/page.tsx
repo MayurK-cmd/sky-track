@@ -27,7 +27,7 @@ export default function Airlines() {
     setError("");
     setAirlineData([]);
 
-    const apiKey = process.env.NEXT_PUBLIC_API;
+    const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 
     if (!apiKey) {
       setError("API key is missing or undefined.");

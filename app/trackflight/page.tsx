@@ -25,7 +25,7 @@ export default function FlightSearch() {
     setError("");
     setFlightData(null);
 
-    const apiKey = process.env.NEXT_PUBLIC_FLIGHT_TRACK_API;
+    const apiKey = process.env.NEXT_PUBLIC_FLIGHT_TRACK_API_KEY;
 
     if (!apiKey) {
       setError("API key is missing or undefined.");
