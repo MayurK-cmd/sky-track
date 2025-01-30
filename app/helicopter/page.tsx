@@ -66,7 +66,7 @@ export default function Helicopter() {
       } else {
         setHelicopterData(data);
       }
-    } catch (err: any) { // Use any type to catch all errors, and log for debugging
+    } catch (err: unknown) { // Use any type to catch all errors, and log for debugging
       console.error("Error fetching helicopter data:", err); // Log for debugging purposes
       setError("Error: " + (err.message || "Unknown error"));
     } finally {

@@ -56,7 +56,7 @@ export default function FlightSearch() {
       } else {
         setFlightData(data);
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       // Log error to the console for debugging
       console.error("Error fetching flight data:", err);
       setError("Error: " + (err.message || "Unknown error"));

@@ -90,7 +90,7 @@ function MainPage() {
         <div className="relative bg-black p-6 rounded shadow-lg group overflow-hidden">
           <h2 className="text-2xl font-semibold mb-3 text-white">A Brief History of Aviation</h2>
           <p className="leading-7 text-gray-300">
-            The history of aviation began with mankind's dream of flight. From the ancient myth of Icarus to Leonardo da Vinci's sketches of flying machines, humans have always aspired to take to the skies. The first successful powered flight by the Wright brothers in 1903 marked the beginning of modern aviation. Since then, aviation has evolved dramatically, enabling global travel, commerce, and exploration. Today, aviation stands as a testament to human ingenuity and the relentless pursuit of innovation.
+            The history of aviation began with mankind dream of flight. From the ancient myth of Icarus to Leonardo da Vinci's sketches of flying machines, humans have always aspired to take to the skies. The first successful powered flight by the Wright brothers in 1903 marked the beginning of modern aviation. Since then, aviation has evolved dramatically, enabling global travel, commerce, and exploration. Today, aviation stands as a testament to human ingenuity and the relentless pursuit of innovation.
           </p>
 
           {/* Animated border effect */}
